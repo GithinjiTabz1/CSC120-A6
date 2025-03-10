@@ -2,27 +2,24 @@ import java.util.ArrayList;
 
 /**
  * The Car class represents a car in a transportation system.
- * It keeps track of the car's capacity, the number of remaining seats,
+ * It keeps track of the car's capacity,
  * and the passengers on board.
  */
 
 public class Car implements CarRequirements {
     // Attributes
     private int Capacity;
-    private int seatsRemaining;
     public ArrayList<Passenger> Passengers; 
 
     /**
      * Constructor for the Car class.
      * 
      * @param Capacity The total number of seats available in the car.
-     * @param seatsRemaining The number of seats remaining for passengers.
      */
 
     // Constructor for the class
     public Car(int Capacity) {
         this.Capacity = Capacity;
-        this.seatsRemaining = Capacity;
         this.Passengers = new ArrayList<>();  // Initialize the passengers list
     }
 
@@ -44,8 +41,7 @@ public class Car implements CarRequirements {
      */
 
     public int seatsRemaining(){
-        this.seatsRemaining = this.Capacity - Passengers.size();
-        return seatsRemaining;
+        return this.Capacity - Passengers.size();
     }
  /**
      * Adds a passenger to the car if there are available seats.
@@ -54,9 +50,8 @@ public class Car implements CarRequirements {
      * @return true if the passenger was successfully added, false otherwise.
      */
     public Boolean addPassenger(Passenger p) {
-        if (seatsRemaining > 0) {
+        if (this.seatsRemaining() > 0) {
             Passengers.add(p);
-            seatsRemaining--;
             return true;
         } else {
             return false;
@@ -72,7 +67,6 @@ public class Car implements CarRequirements {
     public Boolean removePassenger(Passenger p) {
         if (Passengers.contains(p)) {
             Passengers.remove(p);  // Remove passenger from the list
-            seatsRemaining++;  // Increase available seats
             return true;
         } else {
             return false;  // Passenger not found

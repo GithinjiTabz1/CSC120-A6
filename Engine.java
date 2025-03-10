@@ -70,16 +70,7 @@ public class Engine implements EngineRequirements {
             return false;
         }
     }
-
-    /**
-     * Provides a string representation of the engine's current state.
-     * 
-     * @return A string describing the engine's fuel type, current fuel level, and maximum fuel capacity.
-     */
-    public String toString() {
-        return ("Engine has Fuel type: " + this.f + " current fuel level " + this.currentFuellevel + " and this max fuel level " + this.maxFuelLevel);
-    }
-
+  
     /**
      * Main method to test the functionality of the Engine class.
      * It demonstrates refueling, consuming fuel, and displaying engine state.

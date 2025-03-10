@@ -44,9 +44,9 @@ public class Passenger implements PassengerRequirements {
             System.out.println(name + " was not onboard the car.");
         }
     }
-public String toString(){
-    return name;
-}
+    public String toString(){
+           return name;
+    }
     /**
      * Main method to test the functionality of the Passenger class.
      * It demonstrates a passenger boarding and getting off a car.
