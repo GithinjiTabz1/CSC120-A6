@@ -10,24 +10,24 @@ Listed below are various aspects of the assignment.  When you turn in your work,
 
 ## Assignment Points:
 
-___No__ 10 pts: The class meaningfully implements each of the tests in described in the `TrainTest.java`:
+___YEZ__ 10 pts: The class meaningfully implements each of the tests in described in the `TrainTest.java`:
 
-      ___No__ `testEngineConstructor()`
-      ___No__ `testEngineGo()`
-      __No___ `testCarAddPassenger()`
-      __No___ `testCarRemovePassenger()`
-      ____No_ `testPassengerBoardCarWithSpace()`
-      __No___ `testPassengerBoardCarFull()`
-      ___No__ `testTrainConstructor()`
-      __No___ `testTrainPassengerCount()`
-      __No___ `testTrainGetCar()`
-      ___No__ `testTrainPrintManifest()`
+      ___YES__ `testEngineConstructor()`
+      ___YES__ `testEngineGo()`
+      __YES___ `testCarAddPassenger()`
+      __YES___ `testCarRemovePassenger()`
+      ____YES_ `testPassengerBoardCarWithSpace()`
+      __YES___ `testPassengerBoardCarFull()`
+      ___YES__ `testTrainConstructor()`
+      __YES___ `testTrainPassengerCount()`
+      __YES___ `testTrainGetCar()`
+      ___YES__ `testTrainPrintManifest()`
 
 ## General Items:
 
-__NO___ 4 pts: Programs compile without errors or warnings
+__YES___ 4 pts: Programs compile without errors or warnings
 
-__NO___ 2 pts: Executes fully & consistently without crashing (exception/freeze)
+__YES___ 2 pts: Executes fully & consistently without crashing (exception/freeze)
 
 ___YES__ 2 pt: Complies with style guidelines (missing items 1 pt each):
 

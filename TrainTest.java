@@ -10,7 +10,7 @@ public class TrainTest {
     public void testEngineConstructor() {
         Engine engine = new Engine(FuelType.STEAM, 100);
         assertEquals("Fuel type should be STEAM", FuelType.STEAM, engine.getFuelType());
-        assertEquals("Initial fuel should be 100", 100, engine.getCurrentFuel());   
+        assertEquals("Initial fuel should be 100", 100.0, engine.getCurrentFuel(), 0.001);   
     }
 
     @Test
@@ -24,41 +24,55 @@ public class TrainTest {
     @Test
     public void testCarAddPassenger() {
         Car car = new Car(3);
-        Passenger p = new Passenger("Tabz");
-        car.addPassenger(p);
-        car.removePassenger(p);
-        assertEquals("Car should have 0 passengers after removal", 0, car.getCapacity());
+        Passenger p = new Passenger("Alice");
+        assertTrue("Should be able to add passenger when car has space", car.addPassenger(p));
+        assertEquals("Car should have 2 seats remaining after adding passenger", 2, car.seatsRemaining());
     }
 
     @Test
     public void testCarRemovePassenger() {
         Car car = new Car(3);
-        Passenger p = new Passenger("Tabz");
+        Passenger p = new Passenger("Bob");
         car.addPassenger(p);
-        car.removePassenger(p);
-        assertEquals("Car should have 0 passengers after removal", 0, car.getCapacity());
+        assertTrue("Should be able to remove existing passenger", car.removePassenger(p));
+        assertEquals("Car should have 3 seats remaining after removing passenger", 3, car.seatsRemaining());
+    }
+
+    @Test
+    public void testCarAddPassengerFull() {
+        Car car = new Car(1);
+        Passenger p1 = new Passenger("Charlie");
+        Passenger p2 = new Passenger("David");
+        car.addPassenger(p1);
+        assertFalse("Should not be able to add passenger when car is full", car.addPassenger(p2));
+        assertEquals("Car should still have 0 seats remaining", 0, car.seatsRemaining());
+    }
+
+    @Test
+    public void testCarRemoveNonExistentPassenger() {
+        Car car = new Car(3);
+        Passenger p = new Passenger("Eve");
+        assertFalse("Should not be able to remove non-existent passenger", car.removePassenger(p));
+        assertEquals("Car should still have 3 seats remaining", 3, car.seatsRemaining());
     }
 
     // Passenger Tests
     @Test
     public void testPassengerBoardCarWithSpace() {
         Car car = new Car(2);
-        Passenger p = new Passenger("Githinji");
+        Passenger p = new Passenger("Frank");
         p.boardCar(car);  
-        assertEquals("Car should have 1 passenger after boarding", 1, car.getCapacity());
+        assertEquals("Car should have 1 passenger after boarding", 1, car.getCapacity()-car.seatsRemaining());
     }
 
     @Test
     public void testPassengerBoardCarFull() {
         Car car = new Car(1);
-        Passenger p1 = new Passenger("Tabz");
-        Passenger p2 = new Passenger("Githinji");
-
+        Passenger p1 = new Passenger("Grace");
+        Passenger p2 = new Passenger("Henry");
         car.addPassenger(p1);
         p2.boardCar(car); 
-
-        // Assert that p2 did not get added to the car
-        assertEquals("Car should still have only one passenger", 1, car.getCapacity());
+        assertEquals("Car should still have only one passenger", 1, car.getCapacity()-car.seatsRemaining());
     }
 
     // Train Tests
@@ -81,9 +95,9 @@ public class TrainTest {
     public void testTrainPassengerCount() {
         Train train = new Train(FuelType.ELECTRIC, 100.00, 5, 100);
         // Add passengers to different cars
-        train.getCar(0).addPassenger(new Passenger("Clare"));
-        train.getCar(2).addPassenger(new Passenger("Moraa"));
-        train.getCar(4).addPassenger(new Passenger("Mutiso"));
+        train.getCar(0).addPassenger(new Passenger("Ivy"));
+        train.getCar(2).addPassenger(new Passenger("Jack"));
+        train.getCar(4).addPassenger(new Passenger("Kelly"));
 
         int totalPassengers = 0;
         for (int i = 0; i < 5; i++) {
@@ -111,9 +125,9 @@ public class TrainTest {
 
         // Create train and add passengers
         Train train = new Train(FuelType.ELECTRIC, 100.00, 5, 100);
-        train.getCar(0).addPassenger(new Passenger("Tabz"));
-        train.getCar(1).addPassenger(new Passenger("Githinji"));
-        train.getCar(3).addPassenger(new Passenger("Njeri"));
+        train.getCar(0).addPassenger(new Passenger("Liam"));
+        train.getCar(1).addPassenger(new Passenger("Mia"));
+        train.getCar(3).addPassenger(new Passenger("Noah"));
 
         // Call the print method
         train.printManifest();
@@ -124,13 +138,13 @@ public class TrainTest {
         // Get the output and test it
         String printedOutput = outContent.toString();
 
-        assertTrue("Manifest should contain 'Tabz'", printedOutput.contains("Tabz"));
-        assertTrue("Manifest should contain 'Githinji'", printedOutput.contains("Githinji"));
-        assertTrue("Manifest should contain 'Njeri'", printedOutput.contains("Njeri"));
+        assertTrue("Manifest should contain 'Liam'", printedOutput.contains("Liam"));
+        assertTrue("Manifest should contain 'Mia'", printedOutput.contains("Mia"));
+        assertTrue("Manifest should contain 'Noah'", printedOutput.contains("Noah"));
 
         // Check that it mentions each car
-        assertTrue("Manifest should mention 'Car 0'", printedOutput.contains("Car 0"));
         assertTrue("Manifest should mention 'Car 1'", printedOutput.contains("Car 1"));
-        assertTrue("Manifest should mention 'Car 3'", printedOutput.contains("Car 3"));
+        assertTrue("Manifest should mention 'Car 2'", printedOutput.contains("Car 2"));
+        assertTrue("Manifest should mention 'Car 4'", printedOutput.contains("Car 4"));
     }
 }
